@@ -77,7 +77,7 @@ Legal text has real structural boundaries that generic fixed-size chunking ignor
 - **Lettered clauses** (Article 5: `(a)`, `(b)`, `(c)`...) — one chunk per clause, so a query about biometric ID retrieves exactly Article 5(h), not a blended fragment
 - **Fixed-size fallback** for unstructured prose, with overlap to avoid losing context at boundaries
 
-- ## Frontend
+## Frontend
 ![EU AI Act Assistant chat interface](assets/rag-screenshot.png)
 
 ## Evaluation

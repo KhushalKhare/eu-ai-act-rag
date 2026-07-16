@@ -78,7 +78,7 @@ Legal text has real structural boundaries that generic fixed-size chunking ignor
 - **Fixed-size fallback** for unstructured prose, with overlap to avoid losing context at boundaries
 
 ## Frontend
-![EU AI Act Assistant chat interface](assets/rag-screenshot.png)
+!EU AI Act Assistant chat interface](assets/rag-screenshot.png)
 
 ## Evaluation
 

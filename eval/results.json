@@ -1,0 +1,213 @@
+{
+  "overall": {
+    "faithfulness_avg": 0.8666666666666667,
+    "relevancy_avg": 0.9466666666666667,
+    "n_questions": 15
+  },
+  "by_category": {
+    "definitional": {
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "n": 3
+    },
+    "prohibited_practice": {
+      "faithfulness": 0.92,
+      "relevancy": 0.92,
+      "n": 5
+    },
+    "scope": {
+      "faithfulness": 0.5,
+      "relevancy": 0.8,
+      "n": 1
+    },
+    "multi_hop": {
+      "faithfulness": 1.0,
+      "relevancy": 0.8,
+      "n": 1
+    },
+    "adversarial_paraphrase": {
+      "faithfulness": 0.9,
+      "relevancy": 1.0,
+      "n": 1
+    },
+    "unanswerable": {
+      "faithfulness": 0.6666666666666666,
+      "relevancy": 1.0,
+      "n": 3
+    },
+    "false_premise": {
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "n": 1
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.875,
+      "relevancy": 0.95,
+      "n": 4
+    },
+    "medium": {
+      "faithfulness": 0.7666666666666667,
+      "relevancy": 0.9333333333333333,
+      "n": 6
+    },
+    "hard": {
+      "faithfulness": 0.98,
+      "relevancy": 0.96,
+      "n": 5
+    }
+  },
+  "records": [
+    {
+      "id": "q01",
+      "category": "definitional",
+      "difficulty": "easy",
+      "question": "How does the AI Act define an AI system?",
+      "answer": "The AI Act defines an AI system as \"a machine-based system that is designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments\" (Article 3, clause 1).",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 0
+    },
+    {
+      "id": "q02",
+      "category": "definitional",
+      "difficulty": "easy",
+      "question": "What is a provider under the AI Act?",
+      "answer": "According to Article 3, clause 3, a provider under the AI Act means a natural or legal person, public authority, agency or other body that develops an AI system or a general-purpose AI model or that has an AI system or a general-purpose AI model developed and places it on the market or puts the AI system into service under its own name or trademark.",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 0
+    },
+    {
+      "id": "q03",
+      "category": "definitional",
+      "difficulty": "medium",
+      "question": "What's the difference between a provider and a deployer under the Act?",
+      "answer": "The difference between a provider and a deployer under the Act is that a provider (Article 3, clause 3) is a person or entity that develops or places an AI system on the market, whereas a deployer (Article 3, clause 4) is a person or entity that uses an AI system under its authority. In other words, the provider is responsible for creating or distributing the AI system, while the deployer is the one using the AI system, except in cases of personal non-professional activities.",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 0
+    },
+    {
+      "id": "q04",
+      "category": "prohibited_practice",
+      "difficulty": "easy",
+      "question": "Is real-time remote biometric identification in public spaces banned?",
+      "answer": "No, real-time remote biometric identification in public spaces is not banned. According to Article 5, clause h, the use of 'real-time' remote biometric identification systems in publicly accessible spaces for the purposes of law enforcement is allowed if it is \"strictly necessary\" for certain objectives. However, such use must comply with necessary and proportionate safeguards and conditions, including prior authorization from a judicial or independent administrative authority (Article 5, clause 3).",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 3
+    },
+    {
+      "id": "q05",
+      "category": "prohibited_practice",
+      "difficulty": "medium",
+      "question": "Can an AI system be used to predict if someone will commit a crime?",
+      "answer": "According to Article 5, clause d, an AI system cannot be used to predict if someone will commit a crime based solely on the profiling of a natural person or on assessing their personality traits and characteristics. However, Article 5, clause d also states that this prohibition does not apply to AI systems used to support the human assessment of the involvement of a person in a criminal activity, which is already based on objective and verifiable facts directly linked to a criminal activity.",
+      "faithfulness": 1.0,
+      "relevancy": 0.8,
+      "rewrites": 0
+    },
+    {
+      "id": "q06",
+      "category": "prohibited_practice",
+      "difficulty": "hard",
+      "question": "Is it always illegal to infer someone's emotions using AI?",
+      "answer": "It is not always illegal to infer someone's emotions using AI. The text only mentions that there are \"prohibitions of certain AI practices\" (Article 1, clause b), but it does not explicitly state that inferring emotions is always prohibited. In fact, it defines an \"emotion recognition system\" as an AI system for identifying or inferring emotions (Article 3, clause 39), without indicating that such systems are always illegal.",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 3
+    },
+    {
+      "id": "q07",
+      "category": "prohibited_practice",
+      "difficulty": "medium",
+      "question": "What does the Act say about social scoring by governments?",
+      "answer": "According to Article 5, clause c, the Act prohibits the use of AI systems for social scoring by governments, where the social score leads to certain consequences based on a person's social behaviour or personal characteristics. However, the exact consequences are not specified in the provided text. \n\nNo further information is provided in the given text regarding specific government uses, but Article 5, clause c, does describe a prohibited use of AI systems related to social scoring.",
+      "faithfulness": 0.8,
+      "relevancy": 0.8,
+      "rewrites": 1
+    },
+    {
+      "id": "q08",
+      "category": "scope",
+      "difficulty": "easy",
+      "question": "Who does the AI Act apply to?",
+      "answer": "The AI Act applies to providers of AI systems (Article 6, clause d and Article 1, clause b do not explicitly state who the act applies to, but Article 6, clause d mentions \"a provider\" in the context of placing an AI system on the market or putting it into service). Additionally, Article 6, clause d states that \"the provider\" shall be subject to the registration obligation, implying that the act applies to providers.",
+      "faithfulness": 0.5,
+      "relevancy": 0.8,
+      "rewrites": 3
+    },
+    {
+      "id": "q09",
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "question": "What's the difference between real-time and post remote biometric identification?",
+      "answer": "The difference between real-time and post remote biometric identification is that real-time remote biometric identification occurs without a significant delay (Article 3, clause 42), whereas post remote biometric identification refers to any remote biometric identification system that is not real-time (Article 3, clause 43).",
+      "faithfulness": 1.0,
+      "relevancy": 0.8,
+      "rewrites": 0
+    },
+    {
+      "id": "q10",
+      "category": "adversarial_paraphrase",
+      "difficulty": "hard",
+      "question": "Under what circumstances could police legally scan people's faces on the street to find a missing child?",
+      "answer": "According to Article 5, clause (i), police could legally scan people's faces on the street to find a missing child if the use of 'real-time' remote biometric identification systems is strictly necessary for the targeted search for missing persons (Article 5, clause i). \n\nAdditionally, the use of such systems must comply with the necessary and proportionate safeguards and conditions in relation to the use, as stated in Article 5, clause (h) and Article 5, clause (b). This includes obtaining a prior authorisation from a judicial authority or an independent administrative authority, unless in a duly justified situation of urgency (Article 5, clause 3). \n\nThe authorisation shall only be granted if the use is necessary for, and proportionate to, achieving the objective of finding the missing person, and remains limited to what is strictly necessary concerning the period of time as well as the geographic and personal scope (Article 5, clause 3).",
+      "faithfulness": 0.9,
+      "relevancy": 1.0,
+      "rewrites": 0
+    },
+    {
+      "id": "q11",
+      "category": "unanswerable",
+      "difficulty": "medium",
+      "question": "What does the Act say about tax obligations for AI companies?",
+      "answer": "The Act does not mention tax obligations for AI companies. \n\nNo relevant article or clause supports a claim about tax obligations.",
+      "faithfulness": 0.0,
+      "relevancy": 1.0,
+      "rewrites": 3
+    },
+    {
+      "id": "q12",
+      "category": "unanswerable",
+      "difficulty": "medium",
+      "question": "What are the specific monetary fines for violating the AI Act?",
+      "answer": "The retrieved EU AI Act text does not mention specific monetary fines for violating the AI Act. Therefore, no claim can be made regarding the specific monetary fines.",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 3
+    },
+    {
+      "id": "q13",
+      "category": "unanswerable",
+      "difficulty": "hard",
+      "question": "Does the AI Act require companies to carry professional liability insurance?",
+      "answer": "The retrieved EU AI Act text does not mention professional liability insurance. Therefore, it cannot be claimed that the AI Act requires companies to carry professional liability insurance, as there is no supporting text.",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 3
+    },
+    {
+      "id": "q14",
+      "category": "false_premise",
+      "difficulty": "hard",
+      "question": "Which article completely bans all facial recognition technology?",
+      "answer": "There is no article that completely bans all facial recognition technology. Article 5, clause e only prohibits the placing on the market, putting into service, or use of AI systems that create or expand facial recognition databases through untargeted scraping of facial images from the internet or CCTV footage. Additionally, Article 5 imposes certain restrictions and requirements on the use of 'real-time' remote biometric identification systems in publicly accessible spaces for law enforcement purposes, but it does not completely ban all facial recognition technology (Article 5, clauses b and subsequent).",
+      "faithfulness": 1.0,
+      "relevancy": 1.0,
+      "rewrites": 3
+    },
+    {
+      "id": "q15",
+      "category": "prohibited_practice",
+      "difficulty": "medium",
+      "question": "Can companies build facial recognition databases by scraping photos from social media?",
+      "answer": "According to Article 5, clause e, companies are not allowed to place on the market, put into service, or use AI systems that create or expand facial recognition databases through the untargeted scraping of facial images from the internet. This would imply that building facial recognition databases by scraping photos from social media is prohibited.",
+      "faithfulness": 0.8,
+      "relevancy": 1.0,
+      "rewrites": 0
+    }
+  ]
+}

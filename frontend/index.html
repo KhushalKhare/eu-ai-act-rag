@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EU AI Act Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14161a;
+    --surface: #1c1f26;
+    --surface-2: #23262f;
+    --border: #2c303a;
+    --text: #e8e9ed;
+    --text-muted: #8b8f99;
+    --accent-blue: #3a6ac9;
+    --accent-blue-dim: #24345c;
+    --accent-gold: #c9a227;
+    --danger: #c9564f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  header .mark {
+    font-family: 'Source Serif 4', serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  header .mark span {
+    color: var(--accent-gold);
+  }
+
+  header .subtitle {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  main {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .thread {
+    width: 100%;
+    max-width: 720px;
+    padding: 28px 20px 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .empty-state {
+    margin-top: 15vh;
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .empty-state .icon {
+    font-family: 'Source Serif 4', serif;
+    font-size: 34px;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+  }
+
+  .empty-state h2 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+    color: var(--text);
+    font-size: 20px;
+    margin: 6px 0 8px;
+  }
+
+  .empty-state p {
+    font-size: 13.5px;
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .msg {
+    display: flex;
+    gap: 12px;
+    animation: rise 0.25s ease-out;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.user { justify-content: flex-end; }
+
+  .bubble {
+    max-width: 78%;
+    padding: 13px 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+
+  .msg.user .bubble {
+    background: var(--accent-blue-dim);
+    border: 1px solid #2f4a89;
+    border-bottom-right-radius: 3px;
+  }
+
+  .msg.assistant .bubble {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 3px;
+  }
+
+  .msg.assistant .bubble.thinking {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .dots span {
+    display: inline-block;
+    width: 5px; height: 5px;
+    margin-right: 3px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    animation: blink 1.2s infinite ease-in-out;
+  }
+  .dots span:nth-child(2) { animation-delay: 0.15s; }
+  .dots span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+
+  .citations {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .citation {
+    font-family: 'Source Serif 4', serif;
+    font-size: 11.5px;
+    color: var(--accent-gold);
+    background: rgba(201, 162, 39, 0.08);
+    border: 1px solid rgba(201, 162, 39, 0.35);
+    border-radius: 20px;
+    padding: 3px 10px;
+  }
+
+  .meta-row {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 10px;
+  }
+
+  footer {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    padding: 16px 20px 20px;
+    background: linear-gradient(to top, var(--bg) 60%, transparent);
+  }
+
+  .composer {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 10px 10px 16px;
+  }
+
+  .composer:focus-within {
+    border-color: var(--accent-blue);
+  }
+
+  textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14.5px;
+    line-height: 1.5;
+    max-height: 140px;
+    padding: 6px 0;
+  }
+
+  textarea::placeholder { color: var(--text-muted); }
+
+  button.send {
+    background: var(--accent-blue);
+    border: none;
+    color: white;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  button.send:hover:not(:disabled) { background: #4a7ad4; }
+  button.send:disabled { background: var(--surface); cursor: not-allowed; color: var(--text-muted); }
+
+  .disclaimer {
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="mark">EU AI Act <span>Assistant</span></div>
+  <div class="subtitle">Corrective RAG · cites Article &amp; clause</div>
+</header>
+
+<main>
+  <div class="thread" id="thread">
+    <div class="empty-state" id="emptyState">
+      <div class="icon">§</div>
+      <h2>Ask about the Regulation</h2>
+      <p>Answers are grounded only in the retrieved articles and cite the exact clause. If the text doesn't cover something, it will say so.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div style="width:100%; max-width:720px;">
+    <div class="composer">
+      <textarea id="input" placeholder="Ask about prohibited practices, definitions, scope…" rows="1"></textarea>
+      <button class="send" id="sendBtn" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="disclaimer">Informational only — not legal advice. Verify against the official text at EUR-Lex.</div>
+  </div>
+</footer>
+
+<script>
+  const thread = document.getElementById('thread');
+  const emptyState = document.getElementById('emptyState');
+  const input = document.getElementById('input');
+  const sendBtn = document.getElementById('sendBtn');
+
+  const API_URL = '/api/chat';
+
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+
+  sendBtn.addEventListener('click', send);
+
+  function addUserMessage(text) {
+    emptyState.style.display = 'none';
+    const msg = document.createElement('div');
+    msg.className = 'msg user';
+    msg.innerHTML = `<div class="bubble"></div>`;
+    msg.querySelector('.bubble').textContent = text;
+    thread.appendChild(msg);
+    scrollToBottom();
+  }
+
+  function addThinkingMessage() {
+    const msg = document.createElement('div');
+    msg.className = 'msg assistant';
+    msg.id = 'thinkingMsg';
+    msg.innerHTML = `<div class="bubble thinking">Checking the Act <span class="dots"><span></span><span></span><span></span></span></div>`;
+    thread.appendChild(msg);
+    scrollToBottom();
+  }
+
+  function replaceThinkingWithAnswer(data) {
+    const thinkingMsg = document.getElementById('thinkingMsg');
+    if (!thinkingMsg) return;
+
+    const uniqueCitations = [...new Set((data.citations || []).map(c =>
+      c.clause ? `Art. ${c.article_number}(${c.clause})` : `Art. ${c.article_number}`
+    ))].map(label => `<span class="citation">${label}</span>`).join('');
+
+    thinkingMsg.removeAttribute('id');
+    thinkingMsg.innerHTML = `
+      <div class="bubble">
+        ${escapeHtml(data.answer)}
+        ${uniqueCitations ? `<div class="citations">${uniqueCitations}</div>` : ''}
+        <div class="meta-row">
+          <span>${data.grade === 'pass' ? 'Verified against retrieved text' : 'Best effort — retrieval was inconclusive'}</span>
+          ${data.rewrites > 0 ? `<span>${data.rewrites} search retr${data.rewrites > 1 ? 'ies' : 'y'}</span>` : ''}
+        </div>
+      </div>
+    `;
+    scrollToBottom();
+  }
+
+  function showError() {
+    const thinkingMsg = document.getElementById('thinkingMsg');
+    if (!thinkingMsg) return;
+    thinkingMsg.removeAttribute('id');
+    thinkingMsg.querySelector('.bubble').outerHTML =
+      `<div class="bubble" style="color: var(--danger);">Something went wrong reaching the API. Confirm the FastAPI server is running.</div>`;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function scrollToBottom() {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+      thread.parentElement.scrollTop = thread.parentElement.scrollHeight;
+    });
+  }
+
+  async function send() {
+    const question = input.value.trim();
+    if (!question) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+    sendBtn.disabled = true;
+
+    addUserMessage(question);
+    addThinkingMessage();
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question }),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      const data = await res.json();
+      replaceThinkingWithAnswer(data);
+    } catch (err) {
+      console.error(err);
+      showError();
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  }
+</script>
+
+</body>
+</html>

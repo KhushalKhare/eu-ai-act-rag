@@ -77,6 +77,9 @@ Legal text has real structural boundaries that generic fixed-size chunking ignor
 - **Lettered clauses** (Article 5: `(a)`, `(b)`, `(c)`...) — one chunk per clause, so a query about biometric ID retrieves exactly Article 5(h), not a blended fragment
 - **Fixed-size fallback** for unstructured prose, with overlap to avoid losing context at boundaries
 
+- ## Frontend
+![EU AI Act Assistant chat interface]("C:\Users\khush\OneDrive\Desktop\RAG NEW POST.png")
+
 ## Evaluation
 
 Since `ragas` had an unresolvable dependency conflict with `langchain-groq` in this environment (both require incompatible versions of `langchain-core`), evaluation is a custom LLM-as-judge harness (`src/eval.py`) scoring two dimensions per question:
